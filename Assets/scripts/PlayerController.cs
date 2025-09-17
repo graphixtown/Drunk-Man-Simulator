@@ -1,24 +1,27 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Taking Refrence")]
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody2D rb;
+    [Header("Floating, Vector Values")]
     [SerializeField] private float jumpforce;
     [SerializeField] private float playerspeed;
     [SerializeField] private Vector2 jumpheight;
     [SerializeField] private float positionradius, obsticleRadi;
+    [Header("Layermask and Transform Refrence")]
     [SerializeField] private LayerMask groundLayer, obsticleLayer;
     [SerializeField] private Transform playerpos, hipsPos;
-    public bool isonground, isObsticle;
     [SerializeField] private Moving_Script _movingobject;
-    //[SerializeField] Player_Inputs _Inputs;
+    [Header("Booleans")]
+    [SerializeField] public bool isonground;
+    [SerializeField] private bool isObsticle;
 
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         Collider2D[] collider = transform.GetComponentsInChildren<Collider2D>();
@@ -29,25 +32,31 @@ public class PlayerController : MonoBehaviour
                 Physics2D.IgnoreCollision(collider[i], collider[k]);
             }
         }
-        
     }
-
-    // Update is called once per frame
     void Update()
     {
         float MovementX = Input.GetAxisRaw("Horizontal");
-
         if (MovementX != 0)
         {
-            if(MovementX > 0 && isonground)
+            if (MovementX > 0)
             {
-                anim.Play("Walking");
-                rb.AddForce(Vector2.right * playerspeed * Time.deltaTime);
+                if (isonground)
+                {
+                    anim.Play("Walking");
+                    rb.AddForce(Vector2.right * playerspeed * Time.deltaTime);
+                }
+                else
+                    rb.AddForce(Vector2.right * playerspeed / 2 * Time.deltaTime);
             }
-            else if(MovementX < 0 && isonground)
+            else if (MovementX < 0 && isonground)
             {
-                anim.Play("WalkingBack");
-                rb.AddForce(Vector2.left * playerspeed * Time.deltaTime);
+                if (isonground)
+                {
+                    anim.Play("WalkingBack");
+                    rb.AddForce(Vector2.left * playerspeed * Time.deltaTime);
+                }
+                else
+                    rb.AddForce(Vector2.left * playerspeed / 2 * Time.deltaTime);
             }
             else
             {

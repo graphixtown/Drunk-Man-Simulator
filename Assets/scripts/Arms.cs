@@ -6,6 +6,7 @@ public class Arms : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Camera cam;
     [SerializeField] private KeyCode mouseButton;
+
     void Update()
     {
         Vector3 playerpos = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x, cam.ScreenToWorldPoint(Input.mousePosition).y, 0);

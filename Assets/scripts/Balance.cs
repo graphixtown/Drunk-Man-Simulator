@@ -2,13 +2,22 @@ using UnityEngine;
 
 public class Balance : MonoBehaviour
 {
-    [SerializeField] private float TargetRotation;
+    [Header("Refrences")]
     [SerializeField] private Rigidbody2D RB;
+    [Header("Floating Values")]
+    [SerializeField] private float TargetRotation;
     [SerializeField] private float force;
-    
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        RB.MoveRotation(Mathf.LerpAngle(RB.rotation, TargetRotation, force * Time.deltaTime));
+        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            RB.MoveRotation(Mathf.LerpAngle(RB.rotation, TargetRotation, 0 * Time.deltaTime));
+        }
+        else
+        {
+            RB.MoveRotation(Mathf.LerpAngle(RB.rotation, TargetRotation, force * Time.deltaTime));
+        }
     }
+    
 }
