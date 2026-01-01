@@ -13,7 +13,6 @@ public class grabbing : MonoBehaviour
         else
         {
             hold = false;
-            //Debug.Log("Arm distroyed");
             Destroy(GetComponent<FixedJoint2D>());
         }
     }

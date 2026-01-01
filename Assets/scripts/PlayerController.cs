@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Moving_Script _movingobject;
     [Header("Booleans")]
     [SerializeField] public bool isonground;
-    [SerializeField] private bool isObsticle;
+    [SerializeField] private bool isIntractioninRange;
 
 
     void Start()
@@ -35,7 +35,9 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        float MovementX = Input.GetAxisRaw("Horizontal");
+        //float MovementX = Input.GetAxisRaw("Horizontal");
+        float MovementX = Player_Inputs.instance.MoveInput.x;
+        Debug.Log(MovementX);
         if (MovementX != 0)
         {
             if (MovementX > 0)
@@ -69,16 +71,20 @@ public class PlayerController : MonoBehaviour
         }
 
         isonground = Physics2D.OverlapCircle(playerpos.position, positionradius, groundLayer);
-        isObsticle = Physics2D.OverlapCircle(hipsPos.position, obsticleRadi, obsticleLayer);
+        isIntractioninRange = Physics2D.OverlapCircle(hipsPos.position, obsticleRadi, obsticleLayer);
         if(isonground == true && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("jumping");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
         } 
-        if(obsticleLayer != null)
+        /*if(obsticleLayer != null)
         {
-            _movingobject.MoveObsticle(isObsticle);
-        }
+            _movingobject.MoveObsticle(isIntractioninRange);
+        }*/
+    }
+    private void FixedUpdate()
+    {
+        
     }
     private void OnDrawGizmos()
     {

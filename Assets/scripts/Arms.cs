@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Arms : MonoBehaviour
 {
-    int speed = 300;
+    int speed = 50;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Camera cam;
     [SerializeField] private KeyCode mouseButton;

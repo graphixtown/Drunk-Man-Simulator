@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Deadzone
+  - Fan
   layers:
   - Default
   - TransparentFX
@@ -15,10 +16,10 @@ TagManager:
   - UI
   - Player
   - Obsticle
-  - 
-  - 
-  - 
-  - 
+  - onlyintract
+  - armgrab
+  - bottle
+  - NPC
   - 
   - 
   - 
